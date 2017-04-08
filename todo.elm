@@ -5,6 +5,7 @@ import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 
 
+main : Program Never Model Msg
 main =
     beginnerProgram
         { model = model
@@ -34,6 +35,7 @@ model =
 -- update
 
 
+stylesheet : Html Msg
 stylesheet =
     let
         tag =
@@ -84,7 +86,7 @@ update msg model =
 
 todoItem : String -> Html Msg
 todoItem todo =
-    li [] [ text todo, button [ onClick (RemoveItem todo) ] [ text "x" ] ]
+    li [ class "list-group-item" ] [ text todo, button [ onClick (RemoveItem todo), class "btn btn-success" ] [ text "x" ] ]
 
 
 todoList : List String -> Html Msg
@@ -93,11 +95,12 @@ todoList todos =
         child =
             List.map todoItem todos
     in
-        ul [] child
+        ul [ class "list-group" ] child
 
 
+view : Model -> Html Msg
 view model =
-    div [ class "jumbotron" ]
+    div [ class "container jumbotron" ]
         [ stylesheet
         , input
             [ type_ "text"
